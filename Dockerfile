@@ -5,6 +5,10 @@ WORKDIR /build
 RUN go build -o job .
 
 FROM alpine:latest
+
+RUN groupadd -r user && useradd -r -g user user
+USER user
+
 WORKDIR /app
 COPY --from=build /build/job .
 CMD ["/app/job"]
