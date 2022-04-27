@@ -6,7 +6,8 @@ RUN go build -o job .
 
 FROM alpine:latest
 
-RUN groupadd -r user && useradd -r -g user user
+RUN addgroup user 
+RUN adduser -S -G user user
 USER user
 
 WORKDIR /app
